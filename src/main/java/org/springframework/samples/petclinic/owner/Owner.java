@@ -29,6 +29,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.core.style.ToStringCreator;
@@ -58,6 +59,10 @@ public class Owner extends Person {
     @Digits(fraction = 0, integer = 10)
     private String telephone;
 
+    @Column(name = "age")
+    @Range(min = 0, max = 200)
+    private Integer age;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private Set<Pet> pets;
 
@@ -83,6 +88,14 @@ public class Owner extends Person {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     protected Set<Pet> getPetsInternal() {
@@ -142,11 +155,12 @@ public class Owner extends Person {
 
     @Override
     public String toString() {
-        return new ToStringCreator(this)
-
-                .append("id", this.getId()).append("new", this.isNew())
-                .append("lastName", this.getLastName())
-                .append("firstName", this.getFirstName()).append("address", this.address)
-                .append("city", this.city).append("telephone", this.telephone).toString();
+        return "Owner{" +
+            "address='" + address + '\'' +
+            ", city='" + city + '\'' +
+            ", telephone='" + telephone + '\'' +
+            ", age=" + age +
+            ", pets=" + pets +
+            '}';
     }
 }

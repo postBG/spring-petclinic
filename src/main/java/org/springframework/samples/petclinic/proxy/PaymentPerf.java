@@ -3,10 +3,10 @@ package org.springframework.samples.petclinic.proxy;
 import org.springframework.util.StopWatch;
 
 // Proxy
-public class CashPerf implements Payment {
+public class PaymentPerf implements Payment {
     private Payment payment;
 
-    public CashPerf(Payment payment) {
+    public PaymentPerf(Payment payment) {
         this.payment = payment;
     }
 

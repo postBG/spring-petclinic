@@ -40,11 +40,9 @@ class OwnerController {
 
     private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
     private final OwnerRepository owners;
-    private final PetRepository petRepository;
 
-    public OwnerController(OwnerRepository clinicService, PetRepository petRepository) {
+    public OwnerController(OwnerRepository clinicService) {
         this.owners = clinicService;
-        this.petRepository = petRepository;
     }
 
     @InitBinder
@@ -76,6 +74,7 @@ class OwnerController {
     }
 
     @GetMapping("/owners")
+    @LogExecutionTime
     public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 
         // allow parameterless GET request for /owners to return all records
